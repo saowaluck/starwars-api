@@ -26,7 +26,7 @@ class Planet(DateTimeModel):
     surface_water = models.CharField(max_length=40)
     population = models.CharField(max_length=40)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -43,7 +43,7 @@ class People(DateTimeModel):
     gender = models.CharField(max_length=40, blank=True)
     homeworld = models.ForeignKey(Planet, related_name="residents", on_delete=models.CASCADE)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -60,7 +60,7 @@ class Transport(DateTimeModel):
     cargo_capacity = models.CharField(max_length=40)
     consumables = models.CharField(max_length=40)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -103,7 +103,7 @@ class Species(DateTimeModel):
     language = models.CharField(max_length=40)
     people = models.ManyToManyField(People, related_name="species")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -142,7 +142,7 @@ class Film(DateTimeModel):
         blank=True
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
