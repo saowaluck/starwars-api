@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from rest_framework.views import APIView, Response
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from core.models import People, Planet
 from core.serializers import PeopleSerializer
@@ -42,4 +42,9 @@ class PeopleListAPIView(APIView):
 class PeopleGenericView(ListCreateAPIView):
     queryset = People.objects.filter(gender='n/a')
     serializer_class = PeopleSerializer
+
+class PeopleInstanceView(RetrieveUpdateDestroyAPIView):
+    queryset = People.objects.all()
+    serializer_class = PeopleSerializer
+    lookup_fields = ['pk']
 

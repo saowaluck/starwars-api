@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from core.views import PeopleListView, PeopleListAPIView, PeopleGenericView
+from core.views import PeopleListView, PeopleListAPIView, PeopleGenericView, PeopleInstanceView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/peoples/', PeopleListAPIView.as_view(), name="people_api_list"),
     path('api/peoples/v2', PeopleGenericView.as_view(), name="people_api_list_v2"),
+    path('api/peoples/v2/<int:pk>', PeopleInstanceView.as_view(), name="people_api_instance_v2"),
     path('peoples/', PeopleListView.as_view(), name="people_list"),
     path(r'^api-auth/', include('rest_framework.urls')),
 ]
