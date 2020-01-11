@@ -5,8 +5,16 @@ name = "pypi"
 
 [packages]
 django = "*"
+djangorestframework = "*"
+markdown = "*"
+install = "*"
+django-filter = "*"
 
 [dev-packages]
+black = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
