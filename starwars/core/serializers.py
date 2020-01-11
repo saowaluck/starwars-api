@@ -1,6 +1,9 @@
 from rest_framework import serializers
 
-class PeopleSerializer(serializers.Serializer):
-    name = serializers.CharField()
-    gender = serializers.CharField()
-    homeworld = serializers.CharField()
+from core.models import People
+
+
+class PeopleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = People
+        fields = ['name', 'gender', 'homeworld']
