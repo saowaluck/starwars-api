@@ -41,20 +41,9 @@ class PeopleListAPIView(APIView):
     def post(self, request):
         data = request.data
 
-        homeworld = Planet.objects.first()
-        person = People.objects.create(
-            name=data['name'],
-            height=data['height'],
-            mass=data['mass'],
-            hair_color=data['hair_color'],
-            skin_color=data['skin_color'],
-            eye_color=data['eye_color'],
-            birth_year=data['birth_year'],
-            gender=data['gender'],
-            homeworld=homeworld
-        )
+        serializer = PeopleSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
 
-        return_person = PeopleSerializer(person)
-
-        return Response(return_person)
+        return Response(serializer.data)
 
