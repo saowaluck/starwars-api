@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from rest_framework.views import APIView, Response
 
 from core.models import People, Planet
-
+from core.serializers import PeopleSerializer
 
 class PeopleListView(TemplateView):
     def get(self, request):
@@ -31,12 +31,9 @@ class PeopleListAPIView(APIView):
 
         peoples_list = []
         for people in peoples:
-            person = {
-                'name': people.name,
-                'gender': people.gender,
-                'homeworld': people.homeworld.name
-            }
+            serializer = PeopleSerializer(people)
 
+            person = serializer.data
             peoples_list.append(person)
 
         return Response(peoples_list)
@@ -57,11 +54,7 @@ class PeopleListAPIView(APIView):
             homeworld=homeworld
         )
 
-        return_person = {
-            'name': person.name,
-            'gender': person.gender,
-            'homeworld': person.homeworld.name
-        }
+        return_person = PeopleSerializer(person)
 
         return Response(return_person)
 
