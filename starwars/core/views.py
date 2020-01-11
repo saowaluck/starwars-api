@@ -22,21 +22,11 @@ class PeopleListView(TemplateView):
 
 class PeopleListAPIView(APIView):
     def get(self, request):
-        gender = request.query_params.get('gender', None)
+        peoples = People.objects.filter(gender='n/a')
 
-        if gender is not None:
-            peoples = People.objects.filter(gender=gender)
-        else:
-            peoples = People.objects.all()
+        serializer = PeopleSerializer(peoples, many=True)
 
-        peoples_list = []
-        for people in peoples:
-            serializer = PeopleSerializer(people)
-
-            person = serializer.data
-            peoples_list.append(person)
-
-        return Response(peoples_list)
+        return Response(serializer.data)
 
     def post(self, request):
         data = request.data
